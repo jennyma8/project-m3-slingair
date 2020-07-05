@@ -31,5 +31,10 @@ express()
 
   // endpoints
   .get('/flights/:flightNumber', handleFlight)
+  .post()
+ 
+ 
+ 
+ 
   .use((req, res) => res.send('Not Found'))
   .listen(PORT, () => console.log(`Listening on port ${PORT}`));

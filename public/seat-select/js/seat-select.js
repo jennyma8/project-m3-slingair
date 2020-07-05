@@ -75,3 +75,6 @@ const handleConfirmSeat = (event) => {
 };
 
 flightInput.addEventListener('blur', toggleFormContent);
+
+//export to server
+module.exports = { renderSeats, toggleFormContent, handleConfirmSeat }
