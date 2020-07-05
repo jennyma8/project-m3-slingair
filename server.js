@@ -4,7 +4,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const { flights } = require('./test-data/flightSeating');
-//const { toggleFormContent, handleConfirmSeat } = require('./public/seat-select/js/seat-select');
+const { reservations } = require('./test-data/reservations')
+const { toggleFormContent } = require('./public/seat-select/js/seat-select');
 
 
 
@@ -39,10 +40,12 @@ express()
 
   .get('/flights/:flightNumber', handleFlight)
   //returns info on a specific flight
-  //.get('/slingair/flights/:flight', (req, res) => {
-  //   let flight = req.params.flight;
-  //   toggleFormContent;
-  // });
+  .get('/slingair/flights/:flight', (req, res) => {
+    let flight = req.params.flight;
+
+    res.status(200).send(toggleFormContent);
+
+   });
   //returns an array of flight numbers
   .get('/slingair/flights', (req, res) => {
     //convert object to array
@@ -57,10 +60,12 @@ express()
   // //creates a new user/reservation
   // .post('/slingair/users', handleConfirmSeat);
  
+ .get('/slingair/view-reservation', (req, res) => {
+   let data = reservations;
+   res.status(200).send(data);
+ })
  
- 
-  // ### `/view-reservation`
-  // ### `/admin` //to see all of the reservations for a selected flight
+
 
   .use((req, res) => res.send('Not Found'))
   .listen(PORT, () => console.log(`Listening on port ${PORT}`));
