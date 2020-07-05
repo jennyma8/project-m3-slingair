@@ -4,8 +4,12 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const { flights } = require('./test-data/flightSeating');
+const { toggleFormContent, handleConfirmSeat } = require('./public/seat-select/js/seat-select');
+
 
 const PORT = process.env.PORT || 8000;
+
+
 
 const handleFlight = (req, res) => {
   const { flightNumber } = req.params;
@@ -31,7 +35,13 @@ express()
 
   // endpoints
   .get('/flights/:flightNumber', handleFlight)
-  .post()
+  .get('/slingair/flights/:flight', (req, res) => {
+    let flight = req.params.flight;
+    toggleFormContent;
+  });
+
+
+  .post('/slingair/users', handleConfirmSeat);
  
  
  
