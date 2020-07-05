@@ -45,7 +45,8 @@ express()
   // });
   //returns an array of flight numbers
   .get('/slingair/flights', (req, res) => {
-    let data = flights
+    //convert object to array
+    let data = Object.keys(flights);
     res.status(200).send(data);
    })
 
