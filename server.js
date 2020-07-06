@@ -4,7 +4,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const { flights } = require('./test-data/flightSeating');
-//const { reservations } = require('./test-data/reservations')
+const { reservations } = require('./test-data/reservations')
 
 const PORT = process.env.PORT || 8000;
 
@@ -31,14 +31,16 @@ express()
   .use(express.urlencoded({ extended: false }))
 
   // endpoints
-    .get('/flights/:flightNumber', handleFlight)
-  
-  //returns an array of flight numbers
+  .get('/flights/:flightNumber', handleFlight)
+    //returns an array of flight numbers
   .get('/slingair/flights', (req, res) => {
-    //convert object to array
-    let data = Object.keys(flights);
+      //convert object to array
+      let data = Object.keys(flights);
+      res.status(200).send(data);
+  })
+  .get('/slingair/view-reservation', (req, res) => {
+    let data = reservations;
     res.status(200).send(data);
-   })
-
+  })
   .use((req, res) => res.send('Not Found'))
   .listen(PORT, () => console.log(`Listening on port ${PORT}`));
