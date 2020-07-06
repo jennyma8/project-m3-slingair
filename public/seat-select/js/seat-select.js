@@ -4,6 +4,7 @@ const confirmButton = document.getElementById('confirm-button');
 
 let selection = '';
 
+
 const renderSeats = () => {
   document.querySelector('.form-container').style.display = 'block';
 
