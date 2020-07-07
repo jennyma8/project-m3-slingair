@@ -10,7 +10,9 @@
         <div class='main'>
             <header class='header'>
                 <h1 class='header-logo'>Air Slingshot</h1>
+                
             </div>
+            
             <div class="flight-select">
                 <label for="flight">Flight Number :</label>
                 <select name="flight" id="flight" class="flight" type="text" placeholder="flight #">
@@ -18,6 +20,11 @@
                     <option>SA231</option>
                 </select>
             </div>
+            <ul class="nav">
+                    <li><a class="nav-item" href="./">Book</a></li>
+                    <li><a class="nav-item" href="./seat-select/reservation">Reservations</a></li>
+                    <li><a class="nav-item" href="./pages/admin">Admin</a></li>
+            </ul>
             <div class="form-container">
                 <h2>Select your seat and Provide your information!</h2>
                 <form id="seats" class="content" name="salesForm" onsubmit="handleConfirmSeat(event)">

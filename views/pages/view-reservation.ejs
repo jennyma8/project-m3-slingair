@@ -12,10 +12,19 @@
                 <h1 class='header-logo'>Air Slingshot</h1>
             </div>
             <div class="content">
-
+                <form class="form-content reservation" onsubmit="getReservation(event)" method='GET'>
+                    <h1>Please Enter your Reservation Email:</h1>
+                
+                    <div class="res-form">
+                      <label>Email</label>
+                      <input class="" type="text" placeholder="@" required>
+                    </div>
+                    <button class="button confirm" type="submit">Search</button>
+                  </form>
             </div>
         </div>
         <p class='footer-logo'>The only way to fly!</p>
+        
         <script src="./js/view-reservation.js"></script>
     </body>
 </html>

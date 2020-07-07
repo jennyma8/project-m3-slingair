@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="flight-select">
+        <label for="flight">Flight Number :</label>
+        <select name="flight" id="flight" class="flight">
+          <option disabled selected>Please Choose a Flight</option>
+          <% flightNames.forEach(flight => { %>
+            <option> <%= flight %> </option>
+          <% }) %>
+        </select>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Seat</th>
+            <th>Availibity</th>
+            <th>Reserved By</th>
+          </tr>
+        </thead>
+        <tbody id="table-content">
+        </tbody>
+      </table>
+      <script src="/seat-select/js/admin.js"></script>
+</body>
+</html>
