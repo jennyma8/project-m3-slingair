@@ -20,9 +20,9 @@
                 <div class="user">
                     <p class="message">Your flight is confirmed!</p>
                     <ul class="user-info">
-                        <li>Flight #:<span id="flight"><%= user.flight %></span> seat #: <span id="seat"><%= user.seat %></span></li>
-                        <li>Name:<span id="name"><%= user.givenName %> <%= user.surname %></span></li>
-                        <li>Email:<span id="email"><%= user.email %></span></li>
+                        <li>Flight #:<span id="flight"><%- flightNum %></span> seat #:<span id="seat"><%- seat %></span></li>
+                        <li>Name:<span id="name"><%- name %></span></li>
+                        <li>Email:<span id="email"><%- email %></span></li>
                     </ul>
                 </div>
                 

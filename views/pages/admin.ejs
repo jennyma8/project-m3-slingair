@@ -14,9 +14,9 @@
     <div class="flight-select">
         <label for="flight">Flight Number :</label>
         <select name="flight" id="flight" class="flight">
-          <option disabled selected>Please Choose a Flight</option>
-          <% flightNames.forEach(flight => { %>
-            <option> <%= flight %> </option>
+          <option disabled="disabled" selected>Please Choose a Flight</option>
+          <% flightNumbers.forEach(flightNum => { %>
+            <option value="<%= flightNum %>"><%- flightNum %></option>
           <% }) %>
         </select>
       </div>

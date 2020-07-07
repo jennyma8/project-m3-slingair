@@ -15,8 +15,106 @@ const handleFlight = (req, res) => {
   const allFlights = Object.keys(flights);
   // is flightNumber in the array?
   console.log('REAL FLIGHT: ', allFlights.includes(flightNumber));
-  const selectedFlightSeating = flights[flightNumber];
-  res.status(200).send(selectedFlightSeating);
+  const validFlight = allFlights.includes(flightNumber);
+  if (validFlight) {
+    if (req.query.admin) {
+      const flight = flights[flightNumber];
+      flight.forEach((seat) => {
+        if (!seat.isAvailable) {
+          const reserved = reservations.find(
+            (x) => x.flight === flightNumber && x.seat === seat.id
+          );
+          if (reserved) {
+            const occupant = reserved.givenName + " " + reserved.surname;
+            seat.occupant = occupant;
+            seat.bookingId = reserved.id;
+          }
+        }
+      });
+      res.json(flight);
+    } else {
+      res.json(flights[flightNumber]);
+    }
+  } else {
+    res.status(404).redirect("/seat-select");
+  }
+};
+
+const handleSeatSelect = (req, res) => {
+  const flightsNumbers = Object.keys(flights);
+  res.status(200).render("pages/index", { flightNumbers: flightsNumbers });
+};
+
+const handleConfirmed = (req, res) => {
+  const reservationId = req.query.id;
+  const newReservation = reservations.find((x) => x.id === reservationId);
+  if (!newReservation) {
+    res.status(400).redirect("/seat-select");
+  } else {
+    res.status(200).render("pages/confirmed", {
+      flightNum: newReservation.flight,
+      seat: newReservation.seat,
+      name: newReservation.givenName + " " + newReservation.surname,
+      email: newReservation.email,
+    });
+  }
+};
+
+const handleViewReservation = (req, res) => {
+  const givenName = req.query.givenName;
+  const surname = req.query.surname;
+  const email = req.query.email;
+  const userReservations = reservations.filter(
+    (x) =>
+      x.givenName === givenName && x.surname === surname && x.email === email
+  );
+  console.log(userReservations);
+  res
+    .status(200)
+    .render("pages/view-reservation", { reservations: userReservations });
+};
+
+const handlePostReservation = (req, res) => {
+  let queryString = "?givenName=" + req.body.givenName;
+  queryString += "&surname=" + req.body.surname;
+  queryString += "&email=" + req.body.email;
+
+  res.redirect("/reservation" + queryString);
+};
+
+const handlePostCnfirmation = (req, res) => {
+  const newReservation = req.body;
+  newReservation.id = uuidv4();
+
+  const flight = flights[newReservation.flight];
+  const seat = flight.find((x) => x.id === newReservation.seat);
+
+  const reservationExists = reservations.find(
+    (x) =>
+      x.flight === newReservation.flight &&
+      x.givenName === newReservation.givenName &&
+      x.surname === newReservation.surname &&
+      x.email === newReservation.email
+  );
+
+  if (seat.isAvailable && !reservationExists) {
+    seat.isAvailable = false;
+    reservations.push(newReservation);
+    res.status(200).send({ id: newReservation.id });
+  } else {
+    res.status(400).send({ err: "Invalid Reservation" });
+  }
+};
+
+const handleAdmin = (req, res) => {
+  const flightsNumbers = Object.keys(flights);
+  res.status(200).render("pages/admin", { flightNumbers: flightsNumbers });
+};
+
+const handleBookingInfo = (req, res) => {
+  const { bookingId } = req.body;
+  let info = reservations.find((x) => x.id === bookingId);
+  res.status(200).json(info);
 };
 
 express()
@@ -49,83 +147,19 @@ express()
   })
 
 //Accepts query params of `limit` and `start` for pagination. _If values are not provided, it will return the first 10 users_
+
+  .get("/", (req, res) => {
+    res.status(200).redirect("/seat-select");
+  })
+  .get("/seat-select", handleSeatSelect)
+  .get("/confirmed", handleConfirmed)
+  .get("/reservation", handleViewReservation)
+  .get("/flights/:flightNumber", handleFlight)
   //creates a new user/reservation
-  .post('/slingair/users', (req,res) => {
-    const newUser = req.body;
-    reservations.push(newUser);
-    res.json(newUser);
-  })
-
-//renders seat-selection
-  .get("/seat-select", (req, res) => {
-
-    //have to convert object data into an array of names of the flights
-    const flightNames = Object.keys(flights);
-    console.log(flightNames)
-  
-    //render the page
-    res.status(200).render("./pages/seat-select", {
-      flights: flightNames,
-      pageTitle: 'Seat Selection'
-    });
-  })
-
-//sends user to confirmation page
-  .get("/seat-select/confirmed/:id", (req,res) => {
-  let userId = req.params.id;
-
-  //find the reservation info based on the id associated to the res
-  let userInfo = reservations.find(user => user.id === userId);
-
-  //console.log(userInfo);
-
-  //render the confirmation page, passing the approriate info
-  res.status(200).render("./pages/confirmed", {
-    pageTitle: "Confirm Reservation",
-    user: userInfo,
-  })
-})
-
-//search for a reservation
-  .get("/view-reservation", (req,res) => {
-    res.status(200).render('./pages/view-reservation', {
-      pageTitle: 'View reservations',
-    })
-  })
-
-//receives form data and adds it to reservations
-  .post("/users", (req,res) => {
-
-  //takes incoming request info
-  let info = req.body;
-
-  //generate a unique ID for this request
-  let newId = {id: uuidv4()};
-
-  //combine the new property into a single object
-  let newData = {...newId, ...info}
-
-  //finally, push this into the reservations data
-  reservations.push(newData);
-  //console.log(reservations); //should now be added
-
-  //time to udpate the flight availabilities information
-  //from the appropriate flight -> find the matching seating -> update isAvailable
-  flights[info.flight].find(seat => seat.id === info.seat)
-    .isAvailable = false;
-
-  //let body = {status: 200, flightId: newId}
-  //res.status(200).send(body);
-})
-
-  //admin view of all reservations
-  .get("/admin", (req,res) => {
-    res.status(200).render('./pages/admin', {
-      pageTitle: 'Admin',
-      flightNames: Object.keys(flights),
-      flights: flights,
-    })
-  })
+  .post("/slingair/users", handlePostCnfirmation)
+  .post("/view", handlePostReservation)
+  .get("/admin", handleAdmin)
+  .post("/bookinginfo", handleBookingInfo)
 
   .use((req, res) => res.send('Not Found'))
   .listen(PORT, () => console.log(`Listening on port ${PORT}`));
