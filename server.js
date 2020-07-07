@@ -32,6 +32,7 @@ express()
   .use(express.static('public'))
   .use(bodyParser.json())
   .use(express.urlencoded({ extended: false }))
+  .set("view engine", "ejs")
 
   // endpoints
   .get('/flights/:flightNumber', handleFlight)
