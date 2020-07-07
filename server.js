@@ -40,9 +40,19 @@ express()
       let data = Object.keys(flights);
       res.status(200).send(data);
   })
-  .get('/slingair/view-reservation', (req, res) => {
+  //returns an array of all users
+  .get('/slingair/users', (req, res) => {
     let data = reservations;
     res.status(200).send(data);
   })
+
+//Accepts query params of `limit` and `start` for pagination. _If values are not provided, it will return the first 10 users_
+  //creates a new user/reservation
+  .post('/slingair/users', (req,res) => {
+    const newUser = req.body;
+    reservations.push(newUser);
+    res.json(newUser);
+  })
+
   .use((req, res) => res.send('Not Found'))
   .listen(PORT, () => console.log(`Listening on port ${PORT}`));
