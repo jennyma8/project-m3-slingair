@@ -143,8 +143,7 @@ const postData = async () => {
       'Content-Type': 'application/json',
     },
   });
-  })
-}
+  }
 
 //#################### FORM VALIDATION ################################
 
