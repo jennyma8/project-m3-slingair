@@ -4,12 +4,7 @@ const seatsDiv = document.getElementById('seats-section');
 const confirmButton = document.getElementById('confirm-button');
 const seatSelected = document.getElementById("chosenSeat");
 
-let selection = '';
-//
 let selection = undefined;
-
-const renderSeats = () => {
-//######################## RENDER SEATS ##################################
 
 //this function will render the seat, based on current seating data
 const renderSeats = (data) => {
@@ -18,12 +13,19 @@ const renderSeats = (data) => {
   document.querySelector('.form-container').style.display = 'block';
 
   const alpha = ['A', 'B', 'C', 'D', 'E', 'F'];
-@@ -21,16 +30,39 @@ const renderSeats = () => {
+  for (let r = 1; r < 11; r++) {
+    const row = document.createElement('ol');
+    row.classList.add('row');
+    row.classList.add('fuselage');
+    seatsDiv.appendChild(row);
+    for (let s = 1; s < 7; s++) {
+      const seatNumber = `${r}${alpha[s - 1]}`;
+      const seat = document.createElement('li');
+      // Two types of seats to render
       const seatOccupied = `<li><label class="seat"><span id="${seatNumber}" class="occupied">${seatNumber}</span></label></li>`;
       const seatAvailable = `<li><label class="seat"><input type="radio" name="seat" value="${seatNumber}" /><span id="${seatNumber}" class="avail">${seatNumber}</span></label></li>`;
 
-      // TODO: render the seat availability based on the data...
-      seat.innerHTML = seatAvailable;
+     
       //sort the seating data with the matching seatNumber i.e. 1A, 1C, .. etc
       //and check if it is available or not to assign its HTML code
       let seatData = data.find(item => item.id == seatNumber);
@@ -60,9 +62,15 @@ const renderSeats = (data) => {
       seatMap.forEach((x) => {
         if (x.value !== seat.value) {
           document.getElementById(x.value).classList.remove('selected');
-@@ -43,35 +75,120 @@ const renderSeats = () => {
+        }
+      });
+      document.getElementById(seat.value).classList.add('selected');
+      document.getElementById('seat-number').innerText = `(${selection})`;
+      confirmButton.disabled = false;
+    };
   });
 };
+
 
 //####################### TOGGLE FORM CONTENT ############################
 
@@ -73,12 +81,6 @@ const toggleFormContent = (event) => {
   //looks the same for either choice of flight, thought this would make it
   //easier.
   const flightNumber = flightInput.value;
-  console.log('toggleFormContent: ', flightNumber);
-  fetch(`/flights/${flightNumber}`)
-    .then((res) => res.json())
-    .then((data) => {
-      console.log(data);
-    });
   flightName.innerHTML = `Select your Seat for flight ${flightNumber} and Provide your information`;
   //console.log('toggleFormContent: ', flightNumber);
 
@@ -91,14 +93,7 @@ const toggleFormContent = (event) => {
   //COMMENT: I already pass into the page the only available flights
   //so by default the choice of flights is always valid, added the check anyways.
 
-  // TODO: Pass the response data to renderSeats to create the appropriate seat-type.
-  renderSeats();
-};
 
-const handleConfirmSeat = (event) => {
-  event.preventDefault();
-  // TODO: everything in here!
-  fetch('/users', {
   if(flightNumber.startsWith("SA")) {
     //console.log("Yes, this flight starts with SA");
     // TODO: Pass the response data to renderSeats to create the appropriate seat-type.
@@ -195,4 +190,3 @@ const handleConfirmSeat = (event) => {
   }
 };
 
-flightInput.addEventListener('blur', toggleFormContent);

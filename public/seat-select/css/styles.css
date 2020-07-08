@@ -81,12 +81,12 @@ p, a, li, blockquote, input {
     padding: var(--page-padding);
     margin-bottom: var(--page-padding);
 }
-.flight-select input {
+.flight-select select {
     width: 125px;
     margin-left: var(--page-padding);
 }
 
-input {
+select {
     font-size: 24px;
     height: 42px;
     border: 2px solid var(--orange);
@@ -260,3 +260,105 @@ input {
 }
 
 .form-container { display: none; }
+
+.nav {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.nav a {
+  text-decoration: none;
+  color: inherit;
+  padding: 20px;
+}
+
+.nav a:hover {
+  text-decoration: underline;
+}
+
+.reservation {
+  border: 3px solid var(--alabama-crimson);
+  border-radius: 5px;
+  margin: 30px 50px;
+  padding: 30px;
+  width: 100%;
+}
+
+.reservation > h1 {
+  padding-bottom: 50px;
+}
+
+.res-form {
+  display: flex;
+  align-items: center;
+}
+
+.res-form p {
+  font-family: var(--heading-font);
+  padding: 5px;
+  color: #fff;
+  font-size: 2rem;
+}
+
+.res-form label {
+  padding-right: 20px;
+}
+
+.res-form input {
+  border-radius: 3px;
+  border: 1px solid #e4e8eb;
+  box-sizing: border-box;
+  color: #464a5c;
+  font-size: 16px;
+  font-weight: 300;
+  height: 44px;
+  padding: 8px 12px 10px 12px;
+  width: 100px;
+}
+
+.res-form input::placeholder {
+  color: #999;
+}
+
+.reservation button {
+  margin-top: 50px;
+}
+
+table {
+  margin: 10vh auto;
+  width: 90%;
+  border-collapse: collapse;
+
+}
+
+th {
+  text-align: center;
+  font-family: var(--heading-font);
+  color: white;
+  font-size: 2rem;
+  border: 1px solid red;
+  padding: 8px;
+  background-color: var(--cadmium-red);
+}
+
+td {
+  text-align: center;
+  font-family: var(--content-font);
+  color: black;
+  font-size: 1.5rem;
+  border: 1px solid red;
+  padding: 8px;
+  background-color: var(--desert-sand);
+}
+
+.warning {
+  display: none;
+  text-align: center;
+  padding: 15px;
+  width: 100%;
+  border-radius: 3px;
+  margin-top: 10px;
+  font-family: var(--content-font);
+  color: #fff;
+  background-color: var(--cadmium-red);
+} 
