@@ -3,33 +3,41 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=0, minimal-ui" />
-        <link rel="stylesheet" type="text/css" href="./css/styles.css" />
-        <title>Confirmed!</title>
-        <ul class="nav">
-            <li><a class="nav-item" href="./seat-select">Book</a></li>
-            <li><a class="nav-item" href="/view-reservation">Reservations</a></li>
-            <li><a class="nav-item" href="/admin">Admin</a></li>
-    </ul>
+        <link rel="stylesheet" type="text/css" href="/seat-select/css/styles.css" />
+        <title><%= pageTitle %></title>
     </head>
     <body>
-        <div class='main'>
-            <header class='header'>
-                <h1 class='header-logo'>Air Slingshot</h1>
-            </div>
-            <div class="content">
-                <form class="form-content reservation" onsubmit="getReservation(event)" method='GET'>
-                    <h1>Please Enter your Reservation Email:</h1>
-                
-                    <div class="res-form">
-                      <label>Email</label>
-                      <input class="" type="text" placeholder="email" required>
-                    </div>
-                    <button class="button confirm" type="submit">Search</button>
-                  </form>
-            </div>
-        </div>
-        <p class='footer-logo'>The only way to fly!</p>
-        
-        <script src="./js/view-reservation.js"></script>
-    </body>
-</html>
+      <div class='main'>
+          <header class='header'>
+              <h1 class='header-logo'>Air Slingshot</h1>
+              <div class="nav">
+                <h1><a class="link" href="/seat-select">Select Seat</a></h1>
+                <h1><a class="link" href="/view-reservation">View Reservation</a></h1>
+              </div>
+          </header> 
+<div class="content">
+
+  <form class="form-content reservation" onsubmit="getReservation(event)" method='GET'>
+    <h1>Please Enter your Reservation ID:</h1>
+
+    <div class="res-form">
+      <label>ID#</label>
+      <input class="" type="text" maxlength="8" placeholder="XXXXXXXX" required>
+      <p>-</p>
+      <input class="" type="text" maxlength="4" placeholder="XXXX" required>
+      <p>-</p>
+      <input class="" type="text" maxlength="4" placeholder="XXXX" required>
+      <p>-</p>
+      <input class="" type="text" maxlength="4" placeholder="XXXX" required>
+      <p>-</p>
+      <input class="" type="text" maxlength="12" placeholder="XXXXXXXX" required>
+    </div>
+    <button class="button confirm" type="submit">Search</button>
+    <div id="warning" class="form-item warning">ID Not Found! Please Try Again.</div>
+  </form>
+</div>
+</div>
+<p class='footer-logo'>The only way to fly!</p>
+<script src="./seat-select/js/view-reservation.js"></script>
+</body>
+</html> 

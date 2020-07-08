@@ -3,33 +3,35 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=0, minimal-ui" />
-        <link rel="stylesheet" type="text/css" href="./css/styles.css" />
-        <title>Confirmed!</title>
-        <ul class="nav">
-            <li><a class="nav-item" href="./">Book</a></li>
-            <li><a class="nav-item" href="/view-reservation">Reservations</a></li>
-            <li><a class="nav-item" href="/admin">Admin</a></li>
-    </ul>
+        <link rel="stylesheet" type="text/css" href="/seat-select/css/styles.css" />
+        <title><%= pageTitle %></title>
     </head>
     <body>
-        <div class='main'>
-            <header class='header'>
-                <h1 class='header-logo'>Air Slingshot</h1>
-            </div>
-            <div class="content confirmation">
-                <div class="user">
-                    <p class="message">Your flight is confirmed!</p>
-                    <ul class="user-info">
-                        <li>Flight #:<span id="flight"><%- flightNum %></span> seat #:<span id="seat"><%- seat %></span></li>
-                        <li>Name:<span id="name"><%- name %></span></li>
-                        <li>Email:<span id="email"><%- email %></span></li>
-                    </ul>
-                </div>
-                
-                <div class="tombstone"></div>
-            </div>
-        </div>
-        <p class='footer-logo'>The only way to fly!</p>
-        <script src="./js/confirmed.js"></script>
-    </body>
-</html>
+      <div class='main'>
+          <header class='header'>
+              <h1 class='header-logo'>Air Slingshot</h1>
+              <div class="nav">
+                <h1><a class="link" href="/seat-select">Select Seat</a></h1>
+                <h1><a class="link" href="/view-reservation">View Reservation</a></h1>
+              </div>
+          </header> 
+<div class='main'>
+  <h2>Your Reservation ID #: <span><%= user.id %> </span></h2>
+  <div class="content confirmation">
+
+      <div class="user">
+          <p class="message">Your flight is confirmed!</p>
+          <ul class="user-info">
+
+              <li>Flight #:<span id="flight"><%= user.flight %></span> seat #: <span id="seat"><%= user.seat %></span></li>
+              <li>Name:<span id="name"><%= user.givenName %> <%= user.surname %></span></li>
+              <li>Email:<span id="email"><%= user.email %></span></li>
+          </ul>
+      </div>
+      <div class="tombstone"></div>
+  </div>
+</div>
+<p class='footer-logo'>The only way to fly!</p>
+<script src="/seat-select/js/confirmed.js"></script>
+</body>
+</html> 
