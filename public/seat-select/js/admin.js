@@ -31,9 +31,10 @@ const displayTable = (event) => {
       let tableRow = document.createElement('tr');
 
       if(reservations.length > 0) {
+
           reservations.forEach(res => {
-          let seatOccupied = `<tr><td>${seat.id}</td><td>${seat.isAvailable}</td><td><a href="/seat-select/confirmed/${res.id}">${res.givenName + " " + res.surname}</a></td></tr>`
-          let seatUnavailable = `<tr><td>${seat.id}</td><td>${seat.isAvailable}</td><td>${seat.isAvailable ? "-" : "Anonymous" }</td></tr>`
+          let seatOccupied = `<tr><td>${seat.id}</td><td>Reserved</td><td>${res.id}</a></td></tr>`
+          let seatUnavailable = `<tr><td>${seat.id}</td><td>${seat.isAvailable ? "Available" : "Reserved"}</td><td>${seat.isAvailable ? "-" : "Anonymous" }</td></tr>`
         
           if(res.seat === seat.id) {
             tableRow.innerHTML = seatOccupied;

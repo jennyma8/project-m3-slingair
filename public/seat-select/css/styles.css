@@ -310,7 +310,7 @@ select {
   font-weight: 300;
   height: 44px;
   padding: 8px 12px 10px 12px;
-  width: 100px;
+  width: 350px;
 }
 
 .res-form input::placeholder {
@@ -330,21 +330,17 @@ table {
 
 th {
   text-align: center;
-  font-family: var(--heading-font);
   color: white;
   font-size: 2rem;
-  border: 1px solid red;
   padding: 8px;
   background-color: var(--cadmium-red);
 }
 
 td {
   text-align: center;
-  font-family: var(--content-font);
-  color: black;
   font-size: 1.5rem;
   border: 1px solid red;
   padding: 8px;
-  background-color: var(--desert-sand);
+  background-color: white;
 }
 
