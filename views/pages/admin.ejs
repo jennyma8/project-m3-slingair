@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=0, minimal-ui" />
         <link rel="stylesheet" type="text/css" href="/seat-select/css/styles.css" />
-        <title><%= pageTitle %></title>
+       
     </head>
     <body>
       <div class='main'>
@@ -19,16 +19,16 @@
   <label for="flight">Flight Number :</label>
   <select name="flight" id="flight" class="flight">
     <option disabled selected>Select</option>
-    <% flightNames.forEach(flight => { %>
-      <option> <%= flight %> </option>
-    <% }) %>
+    <option>SA123</option>
+    <option>SA231</option>
+    
   </select>
 </div>
 <table>
   <thead>
     <tr>
       <th>Seat</th>
-      <th>Availibility</th>
+      <th>Availability</th>
       <th>Reserved By</th>
     </tr>
   </thead>
