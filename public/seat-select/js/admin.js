@@ -59,9 +59,7 @@ const displayTable = (event) => {
         //append the row once the obove is completed
         table.appendChild(tableRow);
       } else {
-        //this method was to render FLIGHT SA231, which had no reservations
-        //initially, so the above code would not fire since reservations.length = 0;
-        renderRows(seat);
+        return "No Reservation"
       }
     })
   })

@@ -6,10 +6,9 @@ const form = document.querySelector('form');
 //confirmation page based on their reservation id#
 const getReservation = (event) => {
 
-  //as this is a custom form validation, prevent default submission from occuring
+  //prevent default submission
   event.preventDefault();
-  // console.log(event);
-
+ 
   //the form has 4 input fields, that once combined will give us an UUID string
   let userInput = [];
 
@@ -19,18 +18,11 @@ const getReservation = (event) => {
   //...and join them all into a string
   let inputId = userInput.join('-');
 
-
-  // console.log("User Inputted:", inputId);
-  // console.log("Fetching data...");
-
-  //now we want to fetch all current reservations to compare with the inputted
-  //id
+  // fetch all current reservations to compare with the entered ID
   fetch('/users', {method: 'GET'})
   .then(res => res.json())
   .then(data => {
-    //data.forEach(res => console.log(res));
-
-    //match to the first ID in the reservations database
+       //find the matching ID in the reservations database
     let res = data.find(rsv => rsv.id == inputId);
 
     //if there is a match, then redirect, if its undefined then display
@@ -38,8 +30,8 @@ const getReservation = (event) => {
     if(res) {
       window.location = `/seat-select/confirmed/${res.id}`;
     } else {
-      document.getElementById('warning').style.display = 'block';
-      //window.alert("The Reservation ID you entered does not exist!");
+      const error = document.getElementById('error')
+      error.innerHTML = "ID not found"
     }
   })
   .catch(err => console.log(err));
