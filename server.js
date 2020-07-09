@@ -43,16 +43,16 @@ express()
  //sends user to confirmation page
   .get("/seat-select/confirmed/:id", handleConfirmation)
 
- //get the flights #
+ //get array of a specific flight
   .get("/flights/:flightNumber", getFlights)
 
- //search for a reservation
+ //search for a reservation by #id
   .get("/view-reservation", handleReservations)
 
  //receives form data and adds it to reservations
   .post("/users", addReservation)
 
- //retrieves all reservations, including updated form data
+ //retrieves array of all reservations
   .get("/users", getReservations)
 
  //admin view of all reservations

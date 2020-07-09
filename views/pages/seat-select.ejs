@@ -10,32 +10,32 @@
       <div class='main'>
           <header class='header'>
               <h1 class='header-logo'>Air Slingshot</h1>
-              <div class="nav">
-                <h1><a class="link" href="/seat-select">Select Seat</a></h1>
-                <h1><a class="link" href="/view-reservation">View Reservation</a></h1>
-              </div>
+                <ul class="nav">
+                  <li><a class="link" href="/seat-select">Select Seat</a></li>
+                  <li><a class="link" href="/view-reservation">View Reservation</a></li>
+                </ul>
           </header> 
       <div class="flight-select">
         <label for="flight">Flight Number :</label>
         <!-- <input name="flight" id="flight" type="text" placeholder="flight #" /> -->
         <select name="flight" id="flight" class="flight">
-          <option disabled selected>Please Choose a Flight</option>
+          <option disabled selected>Select</option>
           <% flights.forEach(flight => { %>
             <option> <%= flight %> </option>
           <% }) %>
         </select>
+        
       </div>
+     
       <div class="form-container">
+        
         <h2 id="flight-name">Select your seat and Provide your information!</h2>
         <form id="seats" class="content" name="salesForm" onsubmit="handleConfirmSeat(event)" method="POST">
             <div class='form-content plane'>
                 <div id="seats-section"></div>
             </div>
             <div class="form-content user">
-              <div class='form-item'>
-                <label for="seat">Flight Seat #</label>
-                <input id="chosenSeat" type="text" name="chosenSeat" placeholder="Please Choose Seat" readonly required />
-              </div>
+             
                 <div class='form-item'>
                     <label for="givenName">First Name</label>
                     <input id="givenName" type="text" name="givenName" placeholder="Your first name" required />
@@ -52,7 +52,7 @@
                     <div class="lds-dual-ring"></div>
                     Confirm<span id="seat-number"></span>
                 </button>
-                <div id="warning" class="form-item warning">Please Select a Seat!</div> 
+                
         </div>
       </form>
     </div>

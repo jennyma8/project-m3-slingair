@@ -1,36 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <ul class="nav">
-      <li><a class="nav-item" href="./">Book</a></li>
-      <li><a class="nav-item" href="/view-reservation">Reservations</a></li>
-      <li><a class="nav-item" href="/admin">Admin</a></li>
-</ul>
-</head>
-<body>
-    <div class="flight-select">
-        <label for="flight">Flight Number :</label>
-        <select name="flight" id="flight" class="flight">
-          <option disabled="disabled" selected>Please Choose a Flight</option>
-          <% flightNumbers.forEach(flightNum => { %>
-            <option value="<%= flightNum %>"><%- flightNum %></option>
-          <% }) %>
-        </select>
-      </div>
-      <table>
-        <thead>
-          <tr>
-            <th>Seat</th>
-            <th>Availibity</th>
-            <th>Reserved By</th>
-          </tr>
-        </thead>
-        <tbody id="table-content">
-        </tbody>
-      </table>
-      <script src="/seat-select/js/admin.js"></script>
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=0, minimal-ui" />
+        <link rel="stylesheet" type="text/css" href="/seat-select/css/styles.css" />
+        <title><%= pageTitle %></title>
+    </head>
+    <body>
+      <div class='main'>
+          <header class='header'>
+              <h1 class='header-logo'>Air Slingshot</h1>
+              <div class="nav">
+                <h1><a class="link" href="/seat-select">Select Seat</a></h1>
+                <h1><a class="link" href="/view-reservation">View Reservation</a></h1>
+              </div>
+          </header> 
+<div class="flight-select">
+  <label for="flight">Flight Number :</label>
+  <select name="flight" id="flight" class="flight">
+    <option disabled selected>Select</option>
+    <% flightNames.forEach(flight => { %>
+      <option> <%= flight %> </option>
+    <% }) %>
+  </select>
+</div>
+<table>
+  <thead>
+    <tr>
+      <th>Seat</th>
+      <th>Availibility</th>
+      <th>Reserved By</th>
+    </tr>
+  </thead>
+  <tbody id="table-content">
+  </tbody>
+</table>
+<script src="/seat-select/js/admin.js"></script>
 </body>
-</html>
+</html> 
